@@ -1,0 +1,35 @@
+class Solution {
+    public int isPrefixOfWord(String sentence, String searchWord) {
+        StringBuilder sb = new StringBuilder();
+        List<String> list = new ArrayList<>();
+        for (char ch : sentence.toCharArray()) {
+            if (ch != ' ') {
+                sb.append(ch);
+            } else {
+                if (sb.length() > 0) {
+                    list.add(sb.toString());
+                    sb.setLength(0); 
+                }
+            }
+        }
+        if (sb.length() > 0) {
+            list.add(sb.toString());
+        }
+        for (int i = 0; i < list.size(); ++i) {
+            String word = list.get(i);
+            if (word.length() >= searchWord.length()) {
+                boolean check = true;
+                for (int j= 0;j < searchWord.length();++j) {
+                    if (word.charAt(j) != searchWord.charAt(j)) {
+                        check = false;
+                        break;
+                    }
+                }
+                if (check) {
+                    return i + 1; 
+                }
+            }
+        }
+        return -1; 
+    }
+}
